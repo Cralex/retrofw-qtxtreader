@@ -59,9 +59,9 @@ qtxtReader::qtxtReader(QWidget *parent) : QWidget(parent) , scrollValue(0), font
     setupUi(this);
     #ifdef __APPLE__
     #else
-    this->setWindowFlags(Qt::FramelessWindowHint);//去掉标题栏
+    this->setWindowFlags(Qt::FramelessWindowHint);//Remove the title bar
     #endif
-    //this->setGeometry(QRect(0, 0, 320, 240));//可设置窗口显示的方位与大小
+    //this->setGeometry(QRect(0, 0, 320, 240));//The orientation and size of the window display can be set
     m_lastBlockList = 0;
     f_textedit->setTabStopWidth(40);
 
@@ -148,22 +148,22 @@ qtxtReader::qtxtReader(QWidget *parent) : QWidget(parent) , scrollValue(0), font
 
     // bold, italic & underline
 
-    QAction *actFullscreen = new QAction(QString::fromUtf8("全屏"), this);
+    QAction *actFullscreen = new QAction(QString::fromUtf8("Fullscreen"), this);
     //actReloadByUTF8->setShortcut(QKeySequence("CTRL+M"));
     connect(actFullscreen, SIGNAL(triggered()), this, SLOT(fullscreen()));
     //f_textedit->addAction(actFullscreen);
     
 
-    QAction *actReloadByUTF8 = new QAction(QString::fromUtf8("强制使用UTF8编码"), this);
+    QAction *actReloadByUTF8 = new QAction(QString::fromUtf8("Force UTF8"), this);
     //actReloadByUTF8->setShortcut(QKeySequence("CTRL+M"));
     connect(actReloadByUTF8, SIGNAL(triggered()), this, SLOT(reloadByUtf8()));
     //f_textedit->addAction(actReloadByUTF8);
 
-    QAction *actReloadByGBK = new QAction(QString::fromUtf8("强制使用GBK编码"), this);
+    QAction *actReloadByGBK = new QAction(QString::fromUtf8("Force GBK"), this);
     connect(actReloadByGBK, SIGNAL(triggered()), this, SLOT(reloadByGBK()));
     //f_textedit->addAction(actReloadByGBK);
 
-    QAction *textsource = new QAction(QString::fromUtf8("退出"), this);
+    QAction *textsource = new QAction(QString::fromUtf8("Quit"), this);
     textsource->installEventFilter(this);
     //textsource->setShortcut(QKeySequence("CTRL+O"));
     connect(textsource, SIGNAL(triggered()), this, SLOT(slotQuit()));
@@ -177,25 +177,25 @@ qtxtReader::qtxtReader(QWidget *parent) : QWidget(parent) , scrollValue(0), font
     menu->installEventFilter(this);
     menu->addAction(actFullscreen);
 
-    QMenu *menuReload = menu->addMenu(QString::fromUtf8("编码"));
+    QMenu *menuReload = menu->addMenu(QString::fromUtf8("Encoding"));
     menuReload->installEventFilter(this);
     
     //menu->addAction(actReloadByGBK);
     menuReload->addAction(actReloadByGBK);
     menuReload->addAction(actReloadByUTF8);
 
-    QMenu *subMenu = menu->addMenu(QString::fromUtf8("字体"));
+    QMenu *subMenu = menu->addMenu(QString::fromUtf8("Font"));
 
-    QAction *actFontMini = new QAction(QString::fromUtf8("微(12)"), this);
+    QAction *actFontMini = new QAction(QString::fromUtf8("Smallest(12)"), this);
     connect(actFontMini, SIGNAL(triggered()), this, SLOT(actFontMini()));
 
-    QAction *actFontSmall = new QAction(QString::fromUtf8("小(13)"), this);
+    QAction *actFontSmall = new QAction(QString::fromUtf8("Small(13)"), this);
     connect(actFontSmall, SIGNAL(triggered()), this, SLOT(actFontSmall()));
 
-    QAction *actFontMedium = new QAction(QString::fromUtf8("中(14)"), this);
+    QAction *actFontMedium = new QAction(QString::fromUtf8("Medium(14)"), this);
     connect(actFontMedium, SIGNAL(triggered()), this, SLOT(actFontMedium()));
 
-    QAction *actFontBig = new QAction(QString::fromUtf8("大(15)"), this);
+    QAction *actFontBig = new QAction(QString::fromUtf8("Big(15)"), this);
     connect(actFontBig, SIGNAL(triggered()), this, SLOT(actFontBig()));
 
     subMenu->addAction(actFontMini);
@@ -224,8 +224,8 @@ void qtxtReader::readConfig() {
     QString iniFileName = appPath +"/qtxtreader.ini";
     qDebug("read from ini: %s", qPrintable(iniFileName));
     QSettings *settings = new QSettings(iniFileName, QSettings::IniFormat);
-    //向ini文件中写入内容,setValue函数的两个参数是键值对
-    //向ini文件的第一个节写入内容,ip节下的第一个参数
+    //Write content to the ini file, the two parameters of the setValue function are key-value pairs
+    //Write content to the first section of the ini file, the first parameter under the ip section
     //QString scrollValue = settings->getValue(tr("/progress/")+ tr(this->fileName));
     
     QString textColor = settings->value("/skin/textcolor").toString();
@@ -279,8 +279,8 @@ void qtxtReader::writeConfig() {
     qDebug("set textColor: %s", qPrintable(this->textColor));
     qDebug("set scrollValue: %d", this->scrollValue);
     QSettings *settings = new QSettings(iniFileName, QSettings::IniFormat);
-   //向ini文件中写入内容,setValue函数的两个参数是键值对
-   //向ini文件的第一个节写入内容,ip节下的第一个参数
+   //Write content to the ini file, the two parameters of the setValue function are key-value pairs
+   //Write content to the first section of the ini file, the first parameter under the ip section
    //this->fontSize = 12;
    settings->setValue(tr("/skin/fontsize"), this->fontSize);
    settings->setValue(tr("/skin/textcolor"), this->textColor);
@@ -441,9 +441,9 @@ QString qtxtReader::toHtml() const
 void pretty_bytes(char* buf, uint bytes)
 {
     const char* suffixes[7];
-    suffixes[0] = "个";//"B";
-    suffixes[1] = "千";//"KB";
-    suffixes[2] = "万";//"MB";
+    suffixes[0] = "B";//"B";
+    suffixes[1] = "KB";//"KB";
+    suffixes[2] = "MB";//"MB";
     uint s = 0; // which suffix to use
     double count = bytes;
     if(bytes>1000) {
