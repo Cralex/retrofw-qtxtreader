@@ -117,7 +117,7 @@ QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     reader->show();
 #ifdef __APPLE__
 #else
-    QApplication::setOverrideCursor(Qt::BlankCursor); //隐藏鼠标
+    QApplication::setOverrideCursor(Qt::BlankCursor); //Hide the mouse
 #endif
 
     if (argc > 1)
