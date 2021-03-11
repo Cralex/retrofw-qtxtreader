@@ -490,11 +490,11 @@ void qtxtReader::setCode(const QString &text)
 {
     if (text.isEmpty())
     {
-        l_encode_name->setText(QString::fromUtf8("未识别，使用默认utf8"));
+        l_encode_name->setText(QString::fromUtf8("Unrecognized，Use default utf8"));
         return;
     }
     else
     {
-        l_encode_name->setText(QString::fromUtf8("编码：") + text);
+        l_encode_name->setText(QString::fromUtf8("Encoding：") + text);
     }
 }
